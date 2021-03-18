@@ -16,8 +16,6 @@ function getHttps(app) {
 			cert: fs.readFileSync(`${cryptPath}/cert.pem`),
 			ca: fs.readFileSync(`${cryptPath}/chain.pem`),
 		};
-		const redirectToHttps = require('express-redirect-to-https');
-		app.use(redirectToHttps());
 		return https.createServer(httpsOptions, app);
 	} catch {
 		return null;
