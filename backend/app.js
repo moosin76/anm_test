@@ -14,7 +14,7 @@ function getHttps(app) {
 		const httpsOptions = {
 			key: fs.readFileSync(`${cryptPath}/privkey.pem`),
 			cert: fs.readFileSync(`${cryptPath}/cert.pem`),
-			ca: [fs.readFileSync(`${cryptPath}/chain.pem`)],
+			ca: fs.readFileSync(`${cryptPath}/chain.pem`),
 		};
 		return https.createServer(httpsOptions, app);
 	} catch {
@@ -43,7 +43,7 @@ app.set('db', db);
 if (httpsApp != null) {
 	httpsApp.listen(process.env.PORT, () => {
 		console.log(`Express Server Listen on https://localhost:${process.env.PORT}`);
-	})
+	});
 } else {
 	httpApp.listen(process.env.PORT, () => {
 		console.log(`Express Server Listen on http://localhost:${process.env.PORT}`);
