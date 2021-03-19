@@ -14,7 +14,7 @@ function getHttps(app) {
 		const httpsOptions = {
 			key: fs.readFileSync(`${cryptPath}/privkey.pem`),
 			cert: fs.readFileSync(`${cryptPath}/cert.pem`),
-			ca: fs.readFileSync(`${cryptPath}/chain.pem`),
+			ca: [fs.readFileSync(`${cryptPath}/chain.pem`)],
 		};
 		return https.createServer(httpsOptions, app);
 	} catch {
